@@ -96,7 +96,7 @@ RUN dpkg --add-architecture i386 && apt-get update && apt-get install wine32 -y
 RUN git clone https://github.com/0x00-0x00/ShellPop.git
 
 #install gobuster
-apt-get install gobuster
+RUN apt-get install gobuster
 
 #nmapautomator
-git clone https://github.com/21y4d/nmapAutomator.git
+RUN git clone https://github.com/21y4d/nmapAutomator.git
