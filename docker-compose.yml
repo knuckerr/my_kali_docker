@@ -1,0 +1,22 @@
+version: '3'
+services:
+  kali:
+    network_mode: host
+    build: .
+    stdin_open: true
+    tty: true
+    command: "/bin/zsh"
+    container_name: "kali"
+    restart:
+      always
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+
+    volumes:
+      - /home/knucker/kali/share:/root/share/
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    environment:
+      - DISPLAY=unix$DISPLAY
