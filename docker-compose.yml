@@ -5,7 +5,7 @@ services:
     build: .
     stdin_open: true
     tty: true
-    command: "/bin/zsh"
+    command: "/bin/bash"
     container_name: "kali"
     restart:
       always

@@ -1,4 +1,4 @@
-FROM kalilinux/kali-lunx-full
+FROM kalilinux/kali-linux-docker
 
 MAINTAINER knucker
 
@@ -9,6 +9,7 @@ RUN apt-get update && \
     apt-get autoremove -y 
 
 
+RUN apt-get install zsh -y
 # install oh zsh
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
@@ -23,7 +24,6 @@ RUN apt-get install xfce4 -y
 RUN apt install tigervnc-standalone-server tigervnc-viewer -y
 
 
-
 CMD ["/bin/zsh", "--init-file", "/etc/profile"]
 
 RUN echo "set-option -g default-shell /bin/zsh" > /etc/tmux.conf
@@ -34,7 +34,6 @@ RUN echo "export TERM=xterm-256color" >> /root/.zshrc
 
 WORKDIR /root/
 
-ADD knucker.ovpn /root/knucker.ovpn
 
 #copy files to docker
 
@@ -48,7 +47,9 @@ RUN apt-get install npm -y
 RUN mkdir post-exp
 
 #PRIVILLAGE SCRIPTS
-WORKDIR /root/post-exp
+WORKDIR /root/post-expa
+
+RUN apt-get install git -y
 
 RUN git clone https://github.com/rebootuser/LinEnum.git
 
@@ -68,12 +69,11 @@ RUN git clone https://github.com/411Hall/JAWS
 RUN git clone https://github.com/samratashok/nishang
 
 
-#ADD PWNTOOLS
-RUN pip2 install pwntools
 
+#add pip
+RUN apt-get install python-pip -y
 #ADD jedi
-RUN pip2 install jedi
-RUN pip3 install jedi
+RUN pip install jedi
 
 WORKDIR /root/
 
