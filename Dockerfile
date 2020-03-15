@@ -9,7 +9,9 @@ RUN apt-get update && \
     apt-get autoremove -y 
 
 
+RUN apt-get update && apt-get install kali-linux-full -y
 RUN apt-get install zsh -y
+
 # install oh zsh
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
@@ -18,15 +20,15 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 RUN apt-get install xorg -y
 
 # install xface4
-RUN apt-get install xfce4 -y
+RUN apt install kali-desktop-xfce -y
 
 # install vnc server
 RUN apt install tigervnc-standalone-server tigervnc-viewer -y
 
 
-CMD ["/bin/zsh", "--init-file", "/etc/profile"]
+CMD ["/usr/bin/zsh", "--init-file", "/etc/profile"]
 
-RUN echo "set-option -g default-shell /bin/zsh" > /etc/tmux.conf
+RUN echo "set-option -g default-shell /usr/bin/zsh" > /etc/tmux.conf
 
 RUN echo "export LC_ALL=en_US.UTF-8" >> /root/.zshrc
 RUN echo "export LANG=en_US.UTF-8" >> /root/.zshrc
@@ -44,10 +46,9 @@ RUN apt-get install nodejs -y
 
 RUN apt-get install npm -y
 
-RUN mkdir post-exp
 
 #PRIVILLAGE SCRIPTS
-WORKDIR /root/post-expa
+WORKDIR /root/post-exp
 
 RUN apt-get install git -y
 
@@ -88,9 +89,6 @@ RUN apt install numix-icon-theme-circle -y
 #plank
 RUN apt-get install plank -y
 
-#add wine32
-RUN dpkg --add-architecture i386 && apt-get update && apt-get install wine32 -y
-
 
 #scirpt to create shells
 RUN git clone https://github.com/0x00-0x00/ShellPop.git
@@ -100,3 +98,12 @@ RUN apt-get install gobuster
 
 #nmapautomator
 RUN git clone https://github.com/21y4d/nmapAutomator.git
+
+RUN apt-get install firefox-esr -y
+
+RUN dpkg --add-architecture i386 && apt-get update
+RUN apt-get reinstall libgcc-s1:i386 -y
+RUN apt-get install wine32 -y
+
+RUN echo en_US.UTF-8 UTF-8 > /etc/locale.gen
+RUN locale-gen en_US.UTF-8

@@ -5,7 +5,7 @@ services:
     build: .
     stdin_open: true
     tty: true
-    command: "/bin/bash"
+    command: "/usr/bin/zsh"
     container_name: "kali"
     restart:
       always
@@ -15,8 +15,9 @@ services:
       - NET_ADMIN
 
     volumes:
-      - /home/knucker/kali/share:/root/share/
-      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/share:/root/share/
+      - $HOME/.Xauthority:/root/.Xauthority-n
+    ipc: host
 
     environment:
-      - DISPLAY=unix$DISPLAY
+      - DISPLAY=$DISPLAY
