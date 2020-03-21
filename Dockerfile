@@ -107,3 +107,11 @@ RUN apt-get install wine32 -y
 
 RUN echo en_US.UTF-8 UTF-8 > /etc/locale.gen
 RUN locale-gen en_US.UTF-8
+
+
+RUN apt-get install python3.8-dev -y
+
+WORKDIR /root/pwndbg
+RUN ./setup.sh
+
+WORKDIR /root/

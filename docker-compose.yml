@@ -15,8 +15,9 @@ services:
       - NET_ADMIN
 
     volumes:
-      - ~/share:/root/share/
-      - $HOME/.Xauthority:/root/.Xauthority-n
+      - $HOME/my_kali_docker/share:/root/share/
+      # - $HOME/.Xauthority:/root/.Xauthority-n
+      - /tmp/.X11-unix:/tmp/.X11-unix
     ipc: host
 
     environment:
