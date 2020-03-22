@@ -115,3 +115,21 @@ WORKDIR /root/pwndbg
 RUN ./setup.sh
 
 WORKDIR /root/
+RUN git clone https://github.com/Hackplayers/evil-winrm
+
+WORKDIR /root/evil-winrm
+RUN gem install evil-winrm
+
+ 
+WORKDIR /root/
+RUN git clone https://github.com/SecureAuthCorp/impacket
+
+WORKDIR /root/impacket
+
+RUN pip install .
+
+RUN gunzip /usr/share/wordlists/rockyou.txt.gz
+
+WORKDIR /root/
+
+RUN git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git
