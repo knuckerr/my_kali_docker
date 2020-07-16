@@ -1,4 +1,4 @@
-FROM kalilinux/kali-linux-docker
+FROM kalilinux/kali-rolling
 
 MAINTAINER knucker
 
@@ -9,8 +9,9 @@ RUN apt-get update && \
     apt-get autoremove -y 
 
 
-RUN apt-get update && apt-get install kali-linux-full -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install kali-linux-large -y
 RUN apt-get install zsh -y
+RUN apt-get install ncat -y
 
 # install oh zsh
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
@@ -41,10 +42,6 @@ WORKDIR /root/
 
 ADD files /root
 
-#install NPM
-RUN apt-get install nodejs -y
-
-RUN apt-get install npm -y
 
 
 #PRIVILLAGE SCRIPTS
@@ -81,10 +78,6 @@ WORKDIR /root/
 #pwndbg
 RUN git clone https://github.com/pwndbg/pwndbg
 
-#themes 
-RUN apt-get install arc-theme -y
-
-RUN apt install numix-icon-theme-circle -y
 
 #plank
 RUN apt-get install plank -y
