@@ -10,7 +10,7 @@ RUN apt-get update && \
 
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install kali-linux-large -y
-RUN apt-get install zsh -y
+RUN apt-get update && apt-get install zsh -y
 RUN apt-get install ncat -y
 
 # install oh zsh
